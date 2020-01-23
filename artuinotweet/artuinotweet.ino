@@ -5,11 +5,13 @@ const char* password = "utNtsvcQztm5";
  
 const int sensor = 1;
 const int sensorOUT = 2;
+long duration, cm, inches;
  
 const char* host = "maker.ifttt.com";
 const int httpsPort = 80;
 String key = "8GrwCSdPqlkFLYylixP6P";
 String evento = "post_tweet";
+
 WiFiClient client;
 void setup() {
  pinMode(sensor,INPUT);
@@ -31,14 +33,26 @@ void setup() {
 }
  
 void loop() {
-   delay(100);
-  Serial.println("Sensor Input: ");
-  Serial.println(digitalRead(sensor));
- delay(100);
-  Serial.println("Sensor Out: ");
-  Serial.println(digitalRead(sensorOUT));
- delay(100);
- if(digitalRead(sensor))
+  
+  digitalWrite(sensorOUT, LOW);
+  delayMicroseconds(5);
+  digitalWrite(sensorOUT, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(sensorOUT, LOW);
+
+  
+  pinMode(sensor, INPUT);
+  duration = pulseIn(sensor, HIGH);
+    cm = (duration/2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
+  inches = (duration/2) / 74;   // Divide by 74 or multiply by 0.0135
+  
+  Serial.print(inches);
+  Serial.print("in, ");
+  Serial.print(cm);
+  Serial.print("cm");
+  Serial.println(); 
+  
+  if(digitalRead(sensor))
  {
   Serial.println("Sensor activado");
   Serial.print("Conectando a: ");
