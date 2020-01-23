@@ -31,9 +31,11 @@ void setup() {
 }
  
 void loop() {
-  
+   delay(100);
+  Serial.println("Sensor Input: ");
   Serial.println(digitalRead(sensor));
  delay(100);
+  Serial.println("Sensor Out: ");
   Serial.println(digitalRead(sensorOUT));
  delay(100);
  if(digitalRead(sensor))
