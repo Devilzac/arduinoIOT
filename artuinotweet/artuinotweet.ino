@@ -14,8 +14,8 @@ String evento = "post_tweet";
 
 WiFiClient client;
 void setup() {
- pinMode(sensor,INPUT);
  pinMode(sensorOUT,OUTPUT);
+ pinMode(sensor,INPUT);
  Serial.begin(115200);
  Serial.println();
  Serial.print("Conectando wifi: ");
@@ -37,11 +37,8 @@ void loop() {
   digitalWrite(sensorOUT, LOW);
   delayMicroseconds(5);
   digitalWrite(sensorOUT, HIGH);
-  delayMicroseconds(10);
+  delayMicroseconds(1000);
   digitalWrite(sensorOUT, LOW);
-
-  
-  pinMode(sensor, INPUT);
   duration = pulseIn(sensor, HIGH);
     cm = (duration/2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
   inches = (duration/2) / 74;   // Divide by 74 or multiply by 0.0135
